@@ -38,10 +38,9 @@ class WP_JSON_Authentication_OAuth1_Authorize {
 	 * default wp-login handlers.
 	 */
 	public function handle_request() {
-		if ( ! is_user_logged_in() ) {
-			wp_safe_redirect( wp_login_url( $_SERVER['REQUEST_URI'] ) );
-			exit;
-		}
+
+		// Ensure visitors are logged in before serving authorization page
+		auth_redirect();
 
 		$response = $this->render_page();
 		if ( is_wp_error( $response ) ) {
