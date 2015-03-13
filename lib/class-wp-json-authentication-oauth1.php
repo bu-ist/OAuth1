@@ -626,7 +626,7 @@ class WP_JSON_Authentication_OAuth1 extends WP_JSON_Authentication {
 				$query_params = $this->join_with_equals_sign( $param_value, $query_params, $param_key );
 			} else {
 				if ( $key ) {
-					$param_key = $key . '[' . $param_key . ']'; // Handle multi-dimensional array
+					$param_key = $key . '%5B' . $param_key . '%5D'; // Handle multi-dimensional array
 				}
 				$string = $param_key . '=' . $param_value; // join with equals sign
 				$query_params[] = urlencode( $string );
