@@ -89,6 +89,12 @@ function json_oauth_server_loaded() {
 	if ( empty( $GLOBALS['wp']->query_vars['json_oauth_route'] ) )
 		return;
 
+	// Do not cache Authentication endpoints
+	// TODO: This needs a better approach
+	if ( function_exists( 'batcache_cancel' ) ) {
+		batcache_cancel();
+	}
+
 	$authenticator = new WP_JSON_Authentication_OAuth1();
 	$response = $authenticator->dispatch( $GLOBALS['wp']->query_vars['json_oauth_route'] );
 
